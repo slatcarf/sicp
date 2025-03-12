@@ -1,0 +1,28 @@
+okay
+STk> (load "pigl.scm")
+okay
+STk> (pigl 'scheme)
+emeschay
+STk> (pigl 'clara)
+araclay
+STk> (pigl 'javascript)
+avascriptjay
+STk> (trace pigl)
+okay
+STk> (pigl 'scheme)
+.. -> pigl with wd = scheme
+.... -> pigl with wd = chemes
+...... -> pigl with wd = hemesc
+........ -> pigl with wd = emesch
+........ <- pigl returns emeschay
+...... <- pigl returns emeschay
+.... <- pigl returns emeschay
+.. <- pigl returns emeschay
+emeschay
+STk> (transcript off)
+*** Error:
+    unbound variable: transcript
+Current eval stack:
+__________________
+  0    (transcript off)
+STk> (transcript-off)
