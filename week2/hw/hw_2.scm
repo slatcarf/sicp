@@ -1,6 +1,7 @@
 (define (fevery f sen)
-    (if (empty? sen)
-        '()
-        (se (f (first sen)) (every f (bf sen)))))
+  (if (empty? sen)
+    '()
+    (se (f (first sen)) (every f (bf sen)))))
 
-(define (sqaure x) (* x x))
+(define (square x)
+  (* x x))
