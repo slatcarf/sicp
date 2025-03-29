@@ -45,6 +45,13 @@
 
 
 
+(define (get-value card high?)
+	(cond ((member? (first card) '(1 2 3 4 5 6 7 8 9)) (first card))
+				((member? (first card) '(j k q)) 10)
+				((eq? (first card) 'a) (if high? 11 1))
+	)
+)
+
 
 
 
