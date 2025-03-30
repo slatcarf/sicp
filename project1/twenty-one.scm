@@ -56,6 +56,7 @@
 	(iter hand 0 0)
 )
 
+; 1.
 (define (best-total hand)
 	(define (iter sum ace-count)
 		(if (= ace-count 0)
@@ -72,8 +73,8 @@
 )
 
 (define (get-value card)
-	(cond ((member? (first card) '(1 2 3 4 5 6 7 8 9)) (first card))
-				((member? (first card) '(j k q J K Q)) 10)
+	(cond ((member? (bl card) '(2 3 4 5 6 7 8 9 10)) (bl card))
+				((member? (bl card) '(j k q J K Q)) 10)
 				((ace? card) 11)
 	)
 )
@@ -82,19 +83,22 @@
 	(equal? (first card) 'A)
 )
 
-; strategies
+; 2. 
 (define (stop-at-17 hand dealers-hand)
 	(< (best-total hand) 17)
 )
 
+; 4.
 (define (dealer-sensitive hand dhand)
 (let ((customer-total (best-total hand))
-			(dcard (first dhand)))
+			(dcard (bl dhand)))
 			(or (and (member? dcard '(7 8 9 10 J K Q A)) (< customer-total 17))
-					(and (member? dcard '(2 3 4 5 6)) (< customer-total 12)))
-)
+					(and (member? dcard '(2 3 4 5 6)) (< customer-total 12))))
+
+
 )
 
+; 3.
 (define (play-n strategy n)
 	(define (iter sum n)
 		(if (= n 0)
@@ -105,8 +109,15 @@
 )
 
 
-(trace dealer-sensitive)
 
-(println 
-(play-n dealer-sensitive 100)
-)
+
+; (trace dealer-sensitive)
+
+; (println 
+; (play-n dealer-sensitive 100)
+; )
+
+; 5.
+(define (stop-at n)
+	(lambda (hand dealers-hand)
+		(< (best-total hand) 17)))
