@@ -120,4 +120,4 @@
 ; 5.
 (define (stop-at n)
 	(lambda (hand dealers-hand)
-		(< (best-total hand) 17)))
+		(< (best-total hand) n)))
