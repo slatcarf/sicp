@@ -58,7 +58,7 @@
 
 (define (best-total hand)
 	(define (iter sum ace-count)
-		(if (eq? ace-count 0)
+		(if (= ace-count 0)
 				sum
 				(if (> sum 21)
 						(iter (- sum 10) (- ace-count 1))
@@ -73,19 +73,32 @@
 
 (define (get-value card)
 	(cond ((member? (first card) '(1 2 3 4 5 6 7 8 9)) (first card))
-				((member? (first card) '(j k q)) 10)
+				((member? (first card) '(j k q J K Q)) 10)
 				((ace? card) 11)
 	)
 )
 
 (define (ace? card) 
-	(eq? (first card) 'a)
+	(equal? (first card) 'A)
+)
+
+; strategies
+(define (stop-at-17 hand dealers-hand)
+	(< (best-total hand) 17)
+)
+
+(define (play-n strategy n)
+	(define (iter sum n)
+		(if (= n 0)
+			sum
+			(iter (+ sum (twenty-one strategy)) (- n 1)))
+	)
+	(iter 0 n)
 )
 
 
+(trace stop-at-17)
 
-
-
-
-
-
+(println 
+(play-n stop-at-17 10)
+)
