@@ -87,6 +87,14 @@
 	(< (best-total hand) 17)
 )
 
+(define (dealer-sensitive hand dhand)
+(let ((customer-total (best-total hand))
+			(dcard (first dhand)))
+			(or (and (member? dcard '(7 8 9 10 J K Q A)) (< customer-total 17))
+					(and (member? dcard '(2 3 4 5 6)) (< customer-total 12)))
+)
+)
+
 (define (play-n strategy n)
 	(define (iter sum n)
 		(if (= n 0)
@@ -97,8 +105,8 @@
 )
 
 
-(trace stop-at-17)
+(trace dealer-sensitive)
 
 (println 
-(play-n stop-at-17 10)
+(play-n dealer-sensitive 100)
 )
