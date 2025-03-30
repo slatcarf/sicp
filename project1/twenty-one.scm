@@ -43,13 +43,43 @@
     	(move-card deck '() (random size)) ))
   (shuffle (make-ordered-deck) 52) )
 
+(define (max-total hand)
+	(define (iter hand sum ace-count)
+		(if (empty? hand)
+				(se sum ace-count)
+				(iter (bf hand)
+							(+ sum (get-value (first hand)))
+							(if (ace? (first hand)) (+ ace-count 1) ace-count)
+				)
+		)
+	)
+	(iter hand 0 0)
+)
 
+(define (best-total hand)
+	(define (iter sum ace-count)
+		(if (eq? ace-count 0)
+				sum
+				(if (> sum 21)
+						(iter (- sum 10) (- ace-count 1))
+						sum
+				)
+		)
+	)
+	(let ((res (max-total hand)))
+		(iter (first res) (first (bf res)))
+	)
+)
 
-(define (get-value card high?)
+(define (get-value card)
 	(cond ((member? (first card) '(1 2 3 4 5 6 7 8 9)) (first card))
 				((member? (first card) '(j k q)) 10)
-				((eq? (first card) 'a) (if high? 11 1))
+				((ace? card) 11)
 	)
+)
+
+(define (ace? card) 
+	(eq? (first card) 'a)
 )
 
 
@@ -59,9 +89,3 @@
 
 
 
-
-
-
-
-
-;                                      32
