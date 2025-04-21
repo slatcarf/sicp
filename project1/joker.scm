@@ -2,11 +2,6 @@
 
 (define (twenty-one strategy)
   (define (play-dealer customer-hand dealer-hand-so-far rest-of-deck)
-		(println customer-hand)
-		(println (best-total customer-hand))
-		(print dealer-hand-so-far)
-		(print '(dealers hand))
-		(println "")
     (cond ((> (best-total dealer-hand-so-far) 21) 1)
 	  ((< (best-total dealer-hand-so-far) 17)
 	   (play-dealer customer-hand
@@ -168,11 +163,8 @@
 	(lambda (hand dealers-hand)
 		(< (best-total hand) n)))
 
+
+
+
 ; (println (best-total '(AH JO AH))) ; (max 33)
 ; (println (best-total '(10S JO AH))) ; (max 32)
-
-
-
-(println 
-(twenty-one dealer-sensitive)
-)
